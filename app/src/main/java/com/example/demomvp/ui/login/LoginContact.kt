@@ -7,7 +7,7 @@ import com.example.demomvp.ui.base.BaseView
 interface LoginContact {
     interface View : BaseView {
         fun loginSuccess(user: User)
-        fun logined()
+        fun loginEd()
     }
 
     interface Presenter : BasePresenter {

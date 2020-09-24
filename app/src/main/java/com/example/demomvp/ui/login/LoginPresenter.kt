@@ -1,7 +1,6 @@
 package com.example.demomvp.ui.login
 
 import android.text.TextUtils
-import android.widget.Toast
 import com.example.demomvp.MainApp
 import com.example.demomvp.R
 import com.example.demomvp.data.model.User
@@ -24,7 +23,7 @@ class LoginPresenter(
 
     override fun checkLogin() {
         if (MainApp.getPrefs().isLogin()) {
-            view.logined()
+            view.loginEd()
         }
     }
 

@@ -24,10 +24,10 @@ class LoginActivity : BaseActivity(), LoginContact.View, View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         initView()
-        checkLogined()
+        checkLoginEd()
     }
 
-    private fun checkLogined() {
+    private fun checkLoginEd() {
         presenter.checkLogin()
     }
 
@@ -59,7 +59,7 @@ class LoginActivity : BaseActivity(), LoginContact.View, View.OnClickListener {
         Toast.makeText(baseContext, "LoginSuccess", Toast.LENGTH_SHORT).show()
     }
 
-    override fun logined() {
+    override fun loginEd() {
         Toast.makeText(baseContext, "Logined", Toast.LENGTH_SHORT).show()
         button_login.setBackgroundResource(R.color.colorAccent)
         text_fake_register.visibility = View.INVISIBLE
