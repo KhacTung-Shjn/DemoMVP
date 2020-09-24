@@ -1,0 +1,27 @@
+package com.example.demomvp.data.repository
+
+import com.example.demomvp.data.model.User
+import com.example.demomvp.data.source.LoginDataSource
+
+class LoginRepository(
+    private val local: LoginDataSource.Local,
+    private val remote: LoginDataSource.Remote
+) : LoginDataSource.Local, LoginDataSource.Remote {
+
+    override fun getUsers(): MutableList<User> = local.getUsers()
+
+    override fun addUser(user: User): Boolean = local.addUser(user)
+
+    override fun isValidateUser(user: User): Boolean = local.isValidateUser(user)
+
+    companion object {
+        private var instance: LoginRepository? = null
+
+        fun getInstance(
+            local: LoginDataSource.Local,
+            remote: LoginDataSource.Remote
+        ): LoginRepository =
+            instance ?: LoginRepository(local, remote).also { instance = it }
+
+    }
+}

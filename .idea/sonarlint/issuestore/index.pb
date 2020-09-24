@@ -1,0 +1,19 @@
+
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+`
+0app/src/main/java/com/example/demomvp/MainApp.kt,a\7\a793f2d9363fda436c333e8cc06b0dcfc614b8b1
+i
+9app/src/main/java/com/example/demomvp/ui/base/BaseView.kt,b\5\b54648c16cec568e053187e3feb7ed6d6eaf8ff1
+n
+>app/src/main/java/com/example/demomvp/ui/base/BasePresenter.kt,c\c\cc436904ee08d220386a4086d31335b57d2e7f53
+o
+?app/src/main/java/com/example/demomvp/ui/login/LoginActivity.kt,2\5\25b2d54b82e63235629c70815e687cd5697c9bca
+p
+@app/src/main/java/com/example/demomvp/ui/login/LoginPresenter.kt,e\a\ea3b1d63ad98355849ef94bdd43201f3d43213b5
+m
+=app/src/main/java/com/example/demomvp/ui/base/BaseActivity.kt,2\7\27147c7d1fcb817509c59b30fdb9789bb83c0708
+n
+>app/src/main/java/com/example/demomvp/ui/login/LoginContact.kt,8\a\8a5fcf402653ffdc4c05c2899366c1e2ade4fe29

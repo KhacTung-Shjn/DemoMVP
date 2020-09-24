@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DemoMVP</string>
+    <string name="user_name_hint">User Name</string>
+    <string name="password_hint">Password</string>
+    <string name="action_login">Login</string>
+    <string name="msg_empty_username">Please enter user name !</string>
+    <string name="msg_empty_pass">Please enter password</string>
+    <string name="msg_login_fail">Username or Password Fail ! Please try again !</string>
+    <string name="label_fake_register">Fake Register(user:a, pass:b)</string>
+    <string name="label_name_song">Name Song</string>
 </resources>
