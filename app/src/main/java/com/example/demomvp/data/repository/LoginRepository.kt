@@ -21,7 +21,9 @@ class LoginRepository(
             local: LoginDataSource.Local,
             remote: LoginDataSource.Remote
         ): LoginRepository =
-            instance ?: LoginRepository(local, remote).also { instance = it }
+            instance ?: synchronized(this) {
+                instance ?: LoginRepository(local, remote).also { instance = it }
+            }
 
     }
 }

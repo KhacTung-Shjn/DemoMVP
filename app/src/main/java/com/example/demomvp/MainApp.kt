@@ -9,12 +9,10 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
-        prefsHelper = PreferencesHelperImpl.getInstance(getSharedPreferences(TAG, MODE_PRIVATE))
     }
 
     companion object {
         val TAG: String = MainApp::class.java.simpleName
-        private var prefsHelper: PreferencesHelperImpl? = null
-        fun getPrefs(): PreferencesHelperImpl = prefsHelper!!
     }
+
 }

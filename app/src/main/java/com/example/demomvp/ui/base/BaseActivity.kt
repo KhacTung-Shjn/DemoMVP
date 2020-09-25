@@ -2,10 +2,17 @@ package com.example.demomvp.ui.base
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.demomvp.MainApp
+import com.example.demomvp.data.source.local.preferences.PreferencesHelperImpl
+import com.example.demomvp.utils.showToast
 
 abstract class BaseActivity : AppCompatActivity(), BaseView {
+
+    val prefsHelper: PreferencesHelperImpl by lazy {
+        PreferencesHelperImpl.getInstance(getSharedPreferences(MainApp.TAG, MODE_PRIVATE))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initPresenter()
@@ -19,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
 
     override fun showMessage(str: String?) {
         if (!TextUtils.isEmpty(str)) {
-            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+            baseContext.showToast(str!!)
         }
     }
 }

@@ -21,9 +21,9 @@ class PreferencesHelperImpl(sharedPreferences: SharedPreferences) :
 
     companion object {
         private var instance: PreferencesHelperImpl? = null
-        fun getInstance(sharedPreferences: SharedPreferences): PreferencesHelperImpl {
-            instance = PreferencesHelperImpl(sharedPreferences)
-            return instance as PreferencesHelperImpl
-        }
+        fun getInstance(sharedPreferences: SharedPreferences): PreferencesHelperImpl =
+            instance ?: synchronized(this) {
+                instance ?: PreferencesHelperImpl(sharedPreferences).also { instance = it }
+            }
     }
 }

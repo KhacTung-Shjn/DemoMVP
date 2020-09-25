@@ -29,9 +29,9 @@ class UserDatabase(context: Context, dbName: String, version: Int) :
 
         private var instance: UserDatabase? = null
 
-        fun getInstance(context: Context): UserDatabase {
-            instance = UserDatabase(context, NAME_DB, VERSION)
-            return instance as UserDatabase
-        }
+        fun getInstance(context: Context): UserDatabase =
+            instance ?: synchronized(this) {
+                instance ?: UserDatabase(context, NAME_DB, VERSION).also { instance = it }
+            }
     }
 }

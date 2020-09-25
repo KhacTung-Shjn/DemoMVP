@@ -21,25 +21,21 @@ class LoginPresenter(
         repository.addUser(User("a", "b"))
     }
 
-    override fun checkLogin() {
-        if (MainApp.getPrefs().isLogin()) {
-            view.loginEd()
-        }
-    }
 
     private fun isValidate(userName: String, pass: String): Boolean {
-        if (TextUtils.isEmpty(userName)) {
-            view.showMessage(R.string.msg_empty_username)
-            return false
-        }
-        if (TextUtils.isEmpty(pass)) {
-            view.showMessage(R.string.msg_empty_pass)
-            return false
-        }
-
-        if (!repository.isValidateUser(User(userName, pass))) {
-            view.showMessage(R.string.msg_login_fail)
-            return false
+        when {
+            TextUtils.isEmpty(userName) -> {
+                view.showMessage(R.string.msg_empty_username)
+                return false
+            }
+            TextUtils.isEmpty(pass) -> {
+                view.showMessage(R.string.msg_empty_pass)
+                return false
+            }
+            !repository.isValidateUser(User(userName, pass)) -> {
+                view.showMessage(R.string.msg_login_fail)
+                return false
+            }
         }
 
         return true
