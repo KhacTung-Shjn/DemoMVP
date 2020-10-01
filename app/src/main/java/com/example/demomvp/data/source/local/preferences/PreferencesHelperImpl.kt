@@ -12,7 +12,6 @@ class PreferencesHelperImpl(private val sharedPreferences: SharedPreferences) :
 
     override fun isLogin() = sharedPreferences.getBoolean(PREF_IS_LOGIN, false)
 
-
     companion object {
         private var instance: PreferencesHelperImpl? = null
         fun getInstance(sharedPreferences: SharedPreferences): PreferencesHelperImpl =

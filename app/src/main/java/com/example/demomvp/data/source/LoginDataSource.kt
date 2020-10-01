@@ -6,8 +6,7 @@ interface LoginDataSource {
     interface Local {
         fun getUsers(): List<User>
         fun addUser(user: User): Boolean
-        fun isValidateUser(user: User): Boolean
-
+        fun isValidUser(userName: String, password: String): Boolean
     }
 
     interface Remote {

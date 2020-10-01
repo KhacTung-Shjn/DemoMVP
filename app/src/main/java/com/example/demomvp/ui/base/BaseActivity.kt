@@ -20,9 +20,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
         showMessage(getString(idString))
     }
 
-    override fun showMessage(str: String?) {
-        if (!str.isNullOrEmpty()) {
-            baseContext.showToast(str)
-        }
+    override fun showMessage(str: String) {
+        baseContext.showToast(str)
     }
 }

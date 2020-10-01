@@ -71,7 +71,6 @@ class LoginActivity : BaseActivity(), LoginContact.View, View.OnClickListener {
 
     override fun loginSuccess(user: User) {
         prefsHelper.setIsLogin(true)
-        showMessage(R.string.msg_login_success)
     }
 
     private fun checkLoginEd() {

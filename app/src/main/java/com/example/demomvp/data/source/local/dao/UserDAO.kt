@@ -5,7 +5,7 @@ import com.example.demomvp.data.model.User
 interface UserDAO{
     fun getUsers(): List<User>
 
-    fun isValidateUser(user: User): Boolean
+    fun isValidUser(userName: String, password:String): Boolean
 
     fun addUser(user: User) : Boolean
 }

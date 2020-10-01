@@ -9,7 +9,8 @@ class LoginLocalDataSource(private val userDAO: UserDAO) : LoginDataSource.Local
 
     override fun addUser(user: User): Boolean = userDAO.addUser(user)
 
-    override fun isValidateUser(user: User): Boolean = userDAO.isValidateUser(user)
+    override fun isValidUser(userName: String, password: String): Boolean =
+        userDAO.isValidUser(userName, password)
 
     companion object {
         private var instance: LoginLocalDataSource? = null
@@ -18,6 +19,5 @@ class LoginLocalDataSource(private val userDAO: UserDAO) : LoginDataSource.Local
             instance ?: synchronized(this) {
                 instance ?: LoginLocalDataSource(userDAO).also { instance = it }
             }
-
     }
 }

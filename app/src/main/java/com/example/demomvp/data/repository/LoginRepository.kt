@@ -12,7 +12,8 @@ class LoginRepository(
 
     override fun addUser(user: User): Boolean = local.addUser(user)
 
-    override fun isValidateUser(user: User): Boolean = local.isValidateUser(user)
+    override fun isValidUser(userName: String, password: String): Boolean =
+        local.isValidUser(userName, password)
 
     companion object {
         private var instance: LoginRepository? = null
@@ -24,6 +25,5 @@ class LoginRepository(
             instance ?: synchronized(this) {
                 instance ?: LoginRepository(local, remote).also { instance = it }
             }
-
     }
 }

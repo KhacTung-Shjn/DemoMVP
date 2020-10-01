@@ -8,8 +8,10 @@ class LoginPresenter(
     private val view: LoginContact.View,
     private val repository: LoginRepository
 ) : LoginContact.Presenter {
+
     override fun onClickLogin(userName: String, pass: String) {
-        if (isValidate(userName, pass)) {
+        if (isValid(userName, pass)) {
+            view.showMessage(R.string.msg_login_success)
             view.loginSuccess(User(userName, pass))
         }
     }
@@ -18,9 +20,8 @@ class LoginPresenter(
         repository.addUser(User("a", "b"))
     }
 
-
-    private fun isValidate(userName: String, pass: String): Boolean {
-        if (!repository.isValidateUser(User(userName, pass))) {
+    private fun isValid(userName: String, pass: String): Boolean {
+        if (!repository.isValidUser(userName, pass)) {
             view.showMessage(R.string.msg_login_fail)
             return false
         }
