@@ -4,8 +4,8 @@ import com.example.demomvp.data.model.User
 
 interface LoginDataSource {
     interface Local {
-        fun getUsers(): MutableList<User>
-        fun addUser(user: User) : Boolean
+        fun getUsers(): List<User>
+        fun addUser(user: User): Boolean
         fun isValidateUser(user: User): Boolean
 
     }

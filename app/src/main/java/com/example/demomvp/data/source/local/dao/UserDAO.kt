@@ -3,7 +3,7 @@ package com.example.demomvp.data.source.local.dao
 import com.example.demomvp.data.model.User
 
 interface UserDAO{
-    fun getUsers(): MutableList<User>
+    fun getUsers(): List<User>
 
     fun isValidateUser(user: User): Boolean
 

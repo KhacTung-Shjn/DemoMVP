@@ -1,6 +1,7 @@
 package com.example.demomvp.ui.login
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import com.example.demomvp.MainApp
 import com.example.demomvp.R
@@ -10,18 +11,17 @@ import com.example.demomvp.data.source.LoginDataSource
 import com.example.demomvp.data.source.local.LoginLocalDataSource
 import com.example.demomvp.data.source.local.dao.UserDAOImpl
 import com.example.demomvp.data.source.local.database.UserDatabase
+import com.example.demomvp.data.source.local.preferences.PreferencesHelperImpl
 import com.example.demomvp.data.source.remote.LoginRemoteDataSource
 import com.example.demomvp.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), LoginContact.View, View.OnClickListener {
 
-    private lateinit var presenter: LoginContact.Presenter
-    private lateinit var localDataSource: LoginDataSource.Local
-    private lateinit var remoteDataSource: LoginDataSource.Remote
-    private lateinit var repository: LoginRepository
-    private lateinit var userDatabase: UserDatabase
-    private lateinit var userDAOImpl: UserDAOImpl
+    private var presenter: LoginContact.Presenter? = null
+    private val prefsHelper: PreferencesHelperImpl by lazy {
+        PreferencesHelperImpl.getInstance(getSharedPreferences(MainApp.TAG, MODE_PRIVATE))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +30,12 @@ class LoginActivity : BaseActivity(), LoginContact.View, View.OnClickListener {
         checkLoginEd()
     }
 
-
     override fun initPresenter() {
-        userDatabase = UserDatabase.getInstance(baseContext)
-        userDAOImpl = UserDAOImpl.getInstance(userDatabase)
-        localDataSource = LoginLocalDataSource.getInstance(userDAOImpl)
-        remoteDataSource = LoginRemoteDataSource()
-        repository = LoginRepository.getInstance(localDataSource, remoteDataSource)
+        val userDatabase = UserDatabase.getInstance(baseContext)
+        val userDAOImpl = UserDAOImpl.getInstance(userDatabase)
+        val localDataSource = LoginLocalDataSource.getInstance(userDAOImpl)
+        val remoteDataSource = LoginRemoteDataSource()
+        val repository = LoginRepository.getInstance(localDataSource, remoteDataSource)
         presenter = LoginPresenter(this, repository)
     }
 
@@ -48,16 +47,30 @@ class LoginActivity : BaseActivity(), LoginContact.View, View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.buttonLogin -> {
-                presenter.onClickLogin(editUsername.text.toString(), editPassword.text.toString())
+                when {
+                    editUsername.text.toString().isEmpty() -> {
+                        showMessage(R.string.msg_empty_username)
+                    }
+                    editPassword.text.toString().isEmpty() -> {
+                        showMessage(R.string.msg_empty_pass)
+                    }
+                    else -> {
+                        presenter?.onClickLogin(
+                            editUsername.text.toString(),
+                            editPassword.text.toString()
+                        )
+                    }
+                }
             }
             R.id.textFakeRegister -> {
-                presenter.onClickFakeRegister()
+                presenter?.addUser()
             }
         }
 
     }
 
     override fun loginSuccess(user: User) {
+        prefsHelper.setIsLogin(true)
         showMessage(R.string.msg_login_success)
     }
 

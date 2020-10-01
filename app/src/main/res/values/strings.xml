@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DemoMVP</string>
-    <string name="user_name_hint">User Name</string>
-    <string name="password_hint">Password</string>
+    <string name="hint_user_name">User Name</string>
+    <string name="hint_password">Password</string>
     <string name="action_login">Login</string>
     <string name="msg_empty_username">Please enter user name !</string>
     <string name="msg_empty_pass">Please enter password</string>

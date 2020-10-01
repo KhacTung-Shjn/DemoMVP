@@ -11,6 +11,6 @@ interface LoginContact {
 
     interface Presenter : BasePresenter {
         fun onClickLogin(userName: String, pass: String)
-        fun onClickFakeRegister()
+        fun addUser()
     }
 }

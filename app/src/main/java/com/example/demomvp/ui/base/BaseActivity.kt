@@ -9,10 +9,6 @@ import com.example.demomvp.utils.showToast
 
 abstract class BaseActivity : AppCompatActivity(), BaseView {
 
-    val prefsHelper: PreferencesHelperImpl by lazy {
-        PreferencesHelperImpl.getInstance(getSharedPreferences(MainApp.TAG, MODE_PRIVATE))
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initPresenter()
@@ -25,8 +21,8 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     }
 
     override fun showMessage(str: String?) {
-        if (!TextUtils.isEmpty(str)) {
-            baseContext.showToast(str!!)
+        if (!str.isNullOrEmpty()) {
+            baseContext.showToast(str)
         }
     }
 }

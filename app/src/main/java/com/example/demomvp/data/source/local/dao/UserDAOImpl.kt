@@ -8,27 +8,35 @@ class UserDAOImpl(userDatabase: UserDatabase) : UserDAO {
 
     private val databaseW = userDatabase.writableDatabase
     private val databaseR = userDatabase.readableDatabase
-    private val listUser: MutableList<User> = mutableListOf()
 
     @SuppressLint("Recycle")
-    override fun getUsers(): MutableList<User> {
-
-        val cusor = databaseR.query(User.TABLE_NAME, null, null, null, null, null, null)
-        cusor.moveToFirst()
-        while (!cusor.isAfterLast) {
-            val userName = cusor.getString(cusor.getColumnIndex(User.USER_NAME))
-            val password = cusor.getString(cusor.getColumnIndex(User.PASSWORD))
+    override fun getUsers(): List<User> {
+        val listUser = mutableListOf<User>()
+        val mCursor = databaseR.query(User.TABLE_NAME, null, null, null, null, null, null)
+        mCursor.moveToFirst()
+        while (!mCursor.isAfterLast) {
+            val userName = mCursor.getString(mCursor.getColumnIndex(User.USER_NAME))
+            val password = mCursor.getString(mCursor.getColumnIndex(User.PASSWORD))
             listUser.add(User(userName, password))
-            cusor.moveToNext()
+            mCursor.moveToNext()
         }
+        mCursor.close()
         return listUser
     }
 
-    override fun isValidateUser(user: User): Boolean = getUsers().contains(user)
+    override fun isValidateUser(user: User): Boolean {
+        val selection = User.USER_NAME + " = ? AND " + User.PASSWORD + " = ?";
+        val selectionArg = arrayOf(user.userName, user.password)
+        val mCursor = databaseR.query(User.TABLE_NAME, null, selection, selectionArg, null, null, null)
+        if (mCursor.count > 0) {
+            mCursor.close()
+            return true
+        }
+        return false
+    }
 
     override fun addUser(user: User): Boolean {
         val result = databaseW.insert(User.TABLE_NAME, null, user.getContentValues())
-        databaseW.close()
         return result >= 0
     }
 

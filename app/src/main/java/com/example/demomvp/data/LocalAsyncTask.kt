@@ -11,7 +11,7 @@ class LocalAsyncTask<P, T>(
 
     override fun doInBackground(vararg params: P): T? {
         try {
-            handler(params.first()) ?: throw IllegalArgumentException("Param cannot be null")
+            handler(params.firstOrNull() ?: throw IllegalArgumentException("Param cannot be empty"))
         } catch (e: Exception) {
             exception = e
         }
@@ -19,7 +19,8 @@ class LocalAsyncTask<P, T>(
     }
 
     override fun onPostExecute(result: T?) {
-        result?.let(callback::onSuccess) ?: (callback::onFailure)
+        result?.let(callback::onSuccess) ?: exception?.let(callback::onFailure)
+
     }
 
 }

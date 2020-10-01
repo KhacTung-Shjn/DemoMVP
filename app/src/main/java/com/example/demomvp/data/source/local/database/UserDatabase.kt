@@ -5,15 +5,18 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.demomvp.data.model.User
 
-class UserDatabase(context: Context, dbName: String, version: Int) :
-    SQLiteOpenHelper(context, dbName, null, version) {
+class UserDatabase(
+    context: Context,
+    dbName: String,
+    version: Int
+) : SQLiteOpenHelper(context, dbName, null, version) {
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL(CREATE_TABLE_LOGIN)
+    override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(CREATE_TABLE_LOGIN)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL(DROP_TABLE_TASK)
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL(DROP_TABLE_TASK)
         onCreate(db)
     }
 

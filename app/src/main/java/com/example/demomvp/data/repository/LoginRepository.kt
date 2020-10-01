@@ -8,7 +8,7 @@ class LoginRepository(
     private val remote: LoginDataSource.Remote
 ) : LoginDataSource.Local, LoginDataSource.Remote {
 
-    override fun getUsers(): MutableList<User> = local.getUsers()
+    override fun getUsers(): List<User> = local.getUsers()
 
     override fun addUser(user: User): Boolean = local.addUser(user)
 
